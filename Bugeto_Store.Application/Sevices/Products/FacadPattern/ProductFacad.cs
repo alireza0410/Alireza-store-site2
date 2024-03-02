@@ -5,21 +5,18 @@ using Bugeto_Store.Application.Services.Products.Commands.AddNewProduct;
 using Bugeto_Store.Application.Services.Products.Queries.GetAllCategories;
 using Bugeto_Store.Application.Services.Products.Queries.GetCategories;
 using Microsoft.AspNetCore.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bugeto_Store.Application.Services.Products.FacadPattern
 {
     public class ProductFacad :IProductFacad
     {
         private readonly IDataBaseContext _context;
-        private readonly IHostingEnvironment _enviroment;
-        public ProductFacad(IDataBaseContext context)
+        private readonly IHostingEnvironment _environment;
+
+        public ProductFacad(IDataBaseContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _environment = hostingEnvironment;
         }
 
         private AddNewCategoryService _addNewCategory;
@@ -35,7 +32,7 @@ namespace Bugeto_Store.Application.Services.Products.FacadPattern
         {
             get
             {
-                return _addNewProductService = _addNewProductService ?? new AddNewProductService(_context, _enviroment);
+                return _addNewProductService = _addNewProductService ?? new AddNewProductService(_context ,_environment);
             }
         }
 
